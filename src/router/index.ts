@@ -4,10 +4,15 @@ import Management from "@/views/manangment/Management.vue";
 import apiInstance from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
+import useLoginStore from "@/store";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        {
+            path: "/",
+            redirect: "/login"
+        },
         {
             path: "/login",
             component: Login
@@ -24,6 +29,11 @@ const setErrorNotification = ({
     description: null
 })
 
+const setSuccessNotification = ({
+    message: null,
+    description: null
+})
+
 const showErrorNotification = (message: string, description: string) => {
     notification.error({
         message,
@@ -31,7 +41,15 @@ const showErrorNotification = (message: string, description: string) => {
     });
 };
 
+const showSuccessNotification = (message: string, description: string) => {
+    notification.success({
+        message,
+        description,
+    });
+};
+
 async function loginVerify() {
+    const loginStore=useLoginStore()
     return apiInstance
         .get("/user/status")
         .then((res) => {
@@ -40,6 +58,11 @@ async function loginVerify() {
                 setErrorNotification.description = res.data.message;
                 return false;
             } else if (res.data.code === code.LOGIN_SUCCESS) {
+                loginStore.userInfo.userName = res.data.data.userName;
+                loginStore.userInfo.permissions = res.data.data.permissions;
+                loginStore.userInfo.avatarPath = res.data.data.avatarPath;
+                setSuccessNotification.message="成功";
+                setSuccessNotification.description="登录成功";
                 return true;
             } else {
                 setErrorNotification.message = "错误";
@@ -62,6 +85,7 @@ router.beforeEach(async (to, from) => {
         showErrorNotification(setErrorNotification.message, setErrorNotification.description)
         return {path: "/login"}
     } else if (isLogin && to.path == "/login") {
+        showSuccessNotification(setSuccessNotification.message, setSuccessNotification.description)
         return {path: "/management"}
     }
 })
