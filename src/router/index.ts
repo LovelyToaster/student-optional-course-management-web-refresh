@@ -4,7 +4,8 @@ import Management from "@/views/manangment/Management.vue";
 import apiInstance from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
-import useLoginStore from "@/store";
+import {useLoginStore, useTeacherStore, useStudentStore} from "@/store";
+import Home from "@/views/manangment/Home.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -19,7 +20,11 @@ const router = createRouter({
         },
         {
             path: "/management",
-            component: Management
+            component: Management,
+            children: [{
+                path: "/management/home",
+                component: Home
+            }]
         }
     ]
 });
@@ -49,7 +54,7 @@ const showSuccessNotification = (message: string, description: string) => {
 };
 
 async function loginVerify() {
-    const loginStore=useLoginStore()
+    const loginStore = useLoginStore()
     return apiInstance
         .get("/user/status")
         .then((res) => {
@@ -58,11 +63,25 @@ async function loginVerify() {
                 setErrorNotification.description = res.data.message;
                 return false;
             } else if (res.data.code === code.LOGIN_SUCCESS) {
-                loginStore.userInfo.userName = res.data.data.userName;
-                loginStore.userInfo.permissions = res.data.data.permissions;
-                loginStore.userInfo.avatarPath = res.data.data.avatarPath;
-                setSuccessNotification.message="成功";
-                setSuccessNotification.description="登录成功";
+                loginStore.updateUserInfo(res.data.data);
+                if (loginStore.userInfo.permissions === 1) {
+                    apiInstance.post("/teacher/search", {
+                        teacherNo: loginStore.userInfo.userName
+                    }).then((res) => {
+                        const teacherStore = useTeacherStore();
+                        teacherStore.updateTeacherInfo(res.data.data[0])
+                    });
+                }
+                if (loginStore.userInfo.permissions === 2) {
+                    apiInstance.post("/student/search", {
+                        studentNo: loginStore.userInfo.userName
+                    }).then((res) => {
+                        const studentStore = useStudentStore();
+                        studentStore.updateStudentInfo(res.data.data[0])
+                    });
+                }
+                setSuccessNotification.message = "成功";
+                setSuccessNotification.description = "登录成功";
                 return true;
             } else {
                 setErrorNotification.message = "错误";

@@ -5,7 +5,7 @@ import {UserOutlined, KeyOutlined} from "@ant-design/icons-vue"
 import apiInstance from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
-import useLoginStore from "@/store";
+import {useLoginStore} from "@/store";
 import {useRouter} from "vue-router";
 
 let userInfo = reactive<LoginInter>({

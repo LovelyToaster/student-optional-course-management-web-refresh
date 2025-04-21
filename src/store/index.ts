@@ -1,18 +1,62 @@
 import {defineStore} from "pinia";
 import {reactive} from "vue";
-import {LoginInter} from "@/types";
+import {LoginInter, StudentInfoInter, TeacherInfoInter} from "@/types";
 
 
-const useLoginStore = defineStore("login", () => {
+export const useLoginStore = defineStore("login", () => {
     let userInfo = reactive<LoginInter>({
         userName: null,
         permissions: null,
         avatarPath: null
     })
 
+    function updateUserInfo(info: LoginInter) {
+        Object.assign(userInfo, info)
+    }
+
     return {
-        userInfo
+        userInfo,
+        updateUserInfo
+    }
+})
+export const useTeacherStore = defineStore("teacher", () => {
+    let teacherInfo = reactive<TeacherInfoInter>({
+        teacherNo: null,
+        teacherName: null,
+        teacherSex: null,
+        teacherAge: null,
+        teacherDegree: null,
+        teacherJob: null,
+        teacherGraduateInstitutions: null,
+        teacherStatus: null
+    })
+
+    function updateTeacherInfo(info: TeacherInfoInter) {
+        Object.assign(teacherInfo, info)
+    }
+
+    return {
+        teacherInfo,
+        updateTeacherInfo
     }
 })
 
-export default useLoginStore
+export const useStudentStore = defineStore("student", () => {
+    let studentInfo = reactive<StudentInfoInter>({
+        studentNo: null,
+        studentName: null,
+        studentSex: null,
+        studentAge: null,
+        studentFaculties: null,
+        studentClass: null
+    })
+
+    function updateStudentInfo(info: StudentInfoInter) {
+        Object.assign(studentInfo, info)
+    }
+
+    return {
+        studentInfo,
+        updateStudentInfo
+    }
+})
