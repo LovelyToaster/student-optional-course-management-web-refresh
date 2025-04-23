@@ -5,7 +5,7 @@ import {LoginInter, StudentInfoInter, TeacherInfoInter} from "@/types";
 
 export const useLoginStore = defineStore("login", () => {
     let userInfo = reactive<LoginInter>({
-        userName: null,
+        userName: "加载中",
         permissions: null,
         avatarPath: null
     })
@@ -21,14 +21,14 @@ export const useLoginStore = defineStore("login", () => {
 })
 export const useTeacherStore = defineStore("teacher", () => {
     let teacherInfo = reactive<TeacherInfoInter>({
-        teacherNo: null,
-        teacherName: null,
-        teacherSex: null,
-        teacherAge: null,
-        teacherDegree: null,
-        teacherJob: null,
-        teacherGraduateInstitutions: null,
-        teacherStatus: null
+        teacherNo: "加载中",
+        teacherName: "加载中",
+        teacherSex: "加载中",
+        teacherAge: "加载中",
+        teacherDegree: "加载中",
+        teacherJob: "加载中",
+        teacherGraduateInstitutions: "加载中",
+        teacherStatus: "加载中"
     })
 
     function updateTeacherInfo(info: TeacherInfoInter) {
