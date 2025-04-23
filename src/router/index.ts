@@ -1,10 +1,6 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Login from "@/views/Login.vue";
 import Management from "@/views/management/Management.vue";
-import apiInstance from "@/hooks/api";
-import code from "@/hooks/code";
-import {notification} from "ant-design-vue";
-import {useLoginStore, useTeacherStore, useStudentStore} from "@/store";
 import Home from "@/views/management/Home.vue";
 import GradeSearch from "@/views/management/grade/GradeSearch.vue";
 
@@ -37,85 +33,5 @@ const router = createRouter({
         }
     ]
 });
-
-const setErrorNotification = ({
-    message: null,
-    description: null
-})
-
-const setSuccessNotification = ({
-    message: null,
-    description: null
-})
-
-const showErrorNotification = (message: string, description: string) => {
-    notification.error({
-        message,
-        description,
-    });
-};
-
-const showSuccessNotification = (message: string, description: string) => {
-    notification.success({
-        message,
-        description,
-    });
-};
-
-async function loginVerify() {
-    const loginStore = useLoginStore()
-    return apiInstance
-        .get("/user/status")
-        .then((res) => {
-            if (res.data.code === code.LOGIN_FAILED) {
-                setErrorNotification.message = "错误";
-                setErrorNotification.description = res.data.message;
-                return false;
-            } else if (res.data.code === code.LOGIN_SUCCESS) {
-                loginStore.updateUserInfo(res.data.data);
-                if (loginStore.userInfo.permissions === 1) {
-                    apiInstance.post("/teacher/search", {
-                        teacherNo: loginStore.userInfo.userName
-                    }).then((res) => {
-                        const teacherStore = useTeacherStore();
-                        teacherStore.updateTeacherInfo(res.data.data[0])
-                    });
-                }
-                if (loginStore.userInfo.permissions === 2) {
-                    apiInstance.post("/student/search", {
-                        studentNo: loginStore.userInfo.userName
-                    }).then((res) => {
-                        const studentStore = useStudentStore();
-                        studentStore.updateStudentInfo(res.data.data[0])
-                    });
-                }
-                setSuccessNotification.message = "成功";
-                setSuccessNotification.description = "登录成功";
-                return true;
-            } else {
-                setErrorNotification.message = "错误";
-                setErrorNotification.description = "未知错误";
-                return false;
-            }
-        })
-        .catch((error) => {
-            console.error("API 请求失败:", error);
-            setErrorNotification.message = "错误";
-            setErrorNotification.description = "网络请求失败，请稍后再试";
-            return false;
-        });
-}
-
-
-router.beforeEach(async (to, from) => {
-    const isLogin = await loginVerify();
-    if (!isLogin && to.path != "/login") {
-        showErrorNotification(setErrorNotification.message, setErrorNotification.description)
-        return {path: "/login"}
-    } else if (isLogin && to.path == "/login") {
-        showSuccessNotification(setSuccessNotification.message, setSuccessNotification.description)
-        return {path: "/management"}
-    }
-})
 
 export default router;

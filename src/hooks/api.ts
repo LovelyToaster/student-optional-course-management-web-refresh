@@ -14,6 +14,11 @@ apiInstance.interceptors.response.use(
                 message: response.data.message,
                 description: response.data.data,
             });
+        if (response.data.code === code.LOGIN_FAILED)
+            notification.error({
+                message: "失败",
+                description: response.data.message,
+            });
         return response;
     },
 );

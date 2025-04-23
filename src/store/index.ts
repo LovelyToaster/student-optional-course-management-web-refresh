@@ -18,6 +18,8 @@ export const useLoginStore = defineStore("login", () => {
         userInfo,
         updateUserInfo
     }
+},{
+    persist:true
 })
 export const useTeacherStore = defineStore("teacher", () => {
     let teacherInfo = reactive<TeacherInfoInter>({
@@ -39,6 +41,8 @@ export const useTeacherStore = defineStore("teacher", () => {
         teacherInfo,
         updateTeacherInfo
     }
+},{
+    persist:true
 })
 
 export const useStudentStore = defineStore("student", () => {
@@ -60,4 +64,6 @@ export const useStudentStore = defineStore("student", () => {
         studentInfo,
         updateStudentInfo
     }
+},{
+    persist:true
 })

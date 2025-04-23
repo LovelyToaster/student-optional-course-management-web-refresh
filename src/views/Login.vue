@@ -68,9 +68,7 @@ function login() {
           message: "成功",
           description: res.data.message
         })
-        loginStore.userInfo.userName = res.data.data.userName
-        loginStore.userInfo.permissions = res.data.data.permissions
-        loginStore.userInfo.avatarPath = res.data.data.avatarPath
+        loginStore.updateUserInfo(res.data.data);
         router.push("/management")
       }
       if (res.data.code === code.LOGIN_FAILED)
@@ -84,11 +82,25 @@ function login() {
   }
 }
 
+function loginStatus(){
+  apiInstance.get("/user/status").then(res => {
+    if (res.data.code === code.LOGIN_SUCCESS) {
+      loginStore.updateUserInfo(res.data.data);
+      notification.success({
+        message: "成功",
+        description: res.data.message
+      })
+      router.push("/management")
+    }
+  })
+}
+
 onMounted(() => {
   loading.value = false
 })
 
 const loading = ref(true)
+loginStatus()
 
 </script>
 

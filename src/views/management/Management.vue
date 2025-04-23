@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {UserOutlined, LogoutOutlined, HomeOutlined, BookOutlined} from "@ant-design/icons-vue";
-import {useLoginStore} from "@/store";
+import {useLoginStore, useStudentStore, useTeacherStore} from "@/store";
 import apiInstance from "@/hooks/api";
 import {ItemType, MenuProps, notification} from "ant-design-vue";
 import code from "@/hooks/code";
@@ -58,8 +58,29 @@ const studentItems: ItemType[] = reactive([
 ]);
 
 const handleClick: MenuProps['onClick'] = e => {
-  router.push({ name: e.key as string });
+  router.push({name: e.key as string});
 };
+
+function getUserInfo() {
+  if (loginStore.userInfo.permissions === 1) {
+    apiInstance.post("/teacher/search", {
+      teacherNo: loginStore.userInfo.userName
+    }).then((res) => {
+      const teacherStore = useTeacherStore();
+      teacherStore.updateTeacherInfo(res.data.data[0])
+    });
+  }
+  if (loginStore.userInfo.permissions === 2) {
+    apiInstance.post("/student/search", {
+      studentNo: loginStore.userInfo.userName
+    }).then((res) => {
+      const studentStore = useStudentStore();
+      studentStore.updateStudentInfo(res.data.data[0])
+    });
+  }
+}
+
+getUserInfo()
 </script>
 
 <template>
