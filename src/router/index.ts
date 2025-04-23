@@ -1,11 +1,12 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Login from "@/views/Login.vue";
-import Management from "@/views/manangment/Management.vue";
+import Management from "@/views/management/Management.vue";
 import apiInstance from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
 import {useLoginStore, useTeacherStore, useStudentStore} from "@/store";
-import Home from "@/views/manangment/Home.vue";
+import Home from "@/views/management/Home.vue";
+import GradeSearch from "@/views/management/grade/GradeSearch.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -23,7 +24,15 @@ const router = createRouter({
             component: Management,
             children: [{
                 path: "/management/home",
-                component: Home
+                component: Home,
+                name: "Home"
+            }, {
+                path: "/management/grade",
+                children: [{
+                    path: "/management/grade/search",
+                    component: GradeSearch,
+                    name: "GradeSearch"
+                }]
             }]
         }
     ]

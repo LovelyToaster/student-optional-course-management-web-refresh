@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import {useLoginStore, useTeacherStore, useStudentStore} from '@/store';
 import {UserOutlined} from "@ant-design/icons-vue";
-import {ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
+import apiInstance from "@/hooks/api";
+import code from "@/hooks/code";
+import {Chart} from '@antv/g2';
 
 const loginStore = useLoginStore();
 const teacherStore = useTeacherStore();
@@ -87,13 +90,79 @@ function getUserData() {
   }
 }
 
+const gpaList = reactive([])
+
+function initChart() {
+  const chart = new Chart({
+    container: 'gpaChart',
+    autoFit: true,
+  });
+
+  chart
+      .data({
+        value: gpaList,
+        transform: [
+          {
+            type: 'rename',
+            gpa:"GPA",
+            term:"学期"
+          }
+        ],
+      })
+      .encode('x', '学期')
+      .encode('y', 'GPA')
+      .scale('x', {
+        range: [0, 1],
+      })
+      .scale('y', {
+        domainMin: 0,
+        nice: true,
+      })
+      .title('绩点统计');
+
+  chart.line().label({
+    text: 'GPA',
+    style: {
+      dx: -10,
+      dy: -12,
+    },
+  });
+
+  chart.point().style('fill', 'white').tooltip(false);
+
+  chart.render();
+}
+
+function getGPA() {
+  if (loginStore.userInfo.permissions === 2) {
+    apiInstance.get("/grade/getGPA", {
+      params: {
+        studentNo: loginStore.userInfo.userName
+      }
+    }).then(res => {
+      if (res.data.code === code.SEARCH_SUCCESS) {
+        data.averageGPA = res.data.data.averageGPA
+        const sortedGPA = res.data.data.GPA.sort((a:any, b:any) => {
+          return a.term.localeCompare(b.term)
+        })
+        Object.assign(gpaList, sortedGPA)
+        initChart()
+      }
+    })
+  }
+}
+
+onMounted(() => {
+  getGPA()
+})
 getUserData()
 
 </script>
 
 <template>
   <div class="homeInfo">
-    <a-card style="margin-right:15px;width: calc(20vw - 30px);display: flex" bodyStyle="width:100%;text-align:center">
+    <a-card style="margin-right:15px;width: calc(20vw - 30px);display: flex"
+            :bodyStyle="{ width: '100%', textAlign: 'center' }">
       <a-avatar :size="150" :src="loginStore.userInfo.avatarPath" style="margin-bottom: 5px">
         <template #icon>
           <UserOutlined/>
@@ -109,7 +178,8 @@ getUserData()
       </div>
       <a-divider></a-divider>
       <div v-if="loginStore.userInfo.permissions===2" class="otherInfo">
-        综合绩点: xxx
+        平均绩点:&nbsp;
+        <a-tag color="blue" style="font-size: 15px">{{ studentStore.studentInfo.averageGPA }}</a-tag>
       </div>
       <div class="otherInfo">
         {{ time }}
@@ -127,10 +197,15 @@ getUserData()
       </a-spin>
     </a-card>
   </div>
+  <div class="chart">
+    <a-card style="width: 100%">
+      <div id="gpaChart" style="max-height: calc(40vh - 30px);"></div>
+    </a-card>
+  </div>
 </template>
 
 <style scoped>
-.homeInfo {
+.homeInfo,.chart {
   margin: 15px;
   display: flex;
 }

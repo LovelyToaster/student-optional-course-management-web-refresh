@@ -43,12 +43,13 @@ export const useTeacherStore = defineStore("teacher", () => {
 
 export const useStudentStore = defineStore("student", () => {
     let studentInfo = reactive<StudentInfoInter>({
-        studentNo: null,
-        studentName: null,
-        studentSex: null,
-        studentAge: null,
-        studentFaculties: null,
-        studentClass: null
+        studentNo: "加载中",
+        studentName: "加载中",
+        studentSex: "加载中",
+        studentAge: "加载中",
+        studentFaculties: "加载中",
+        studentClass: "加载中",
+        averageGPA: "加载中",
     })
 
     function updateStudentInfo(info: StudentInfoInter) {
