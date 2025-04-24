@@ -104,8 +104,8 @@ function initChart() {
         transform: [
           {
             type: 'rename',
-            gpa:"GPA",
-            term:"学期"
+            gpa: "GPA",
+            term: "学期"
           }
         ],
       })
@@ -142,7 +142,7 @@ function getGPA() {
     }).then(res => {
       if (res.data.code === code.SEARCH_SUCCESS) {
         data.averageGPA = res.data.data.averageGPA
-        const sortedGPA = res.data.data.GPA.sort((a:any, b:any) => {
+        const sortedGPA = res.data.data.GPA.sort((a: any, b: any) => {
           return a.term.localeCompare(b.term)
         })
         Object.assign(gpaList, sortedGPA)
@@ -197,7 +197,7 @@ getUserData()
       </a-spin>
     </a-card>
   </div>
-  <div class="chart">
+  <div class="chart" v-if="loginStore.userInfo.permissions === 2">
     <a-card style="width: 100%">
       <div id="gpaChart" style="max-height: calc(40vh - 30px);"></div>
     </a-card>
@@ -205,7 +205,7 @@ getUserData()
 </template>
 
 <style scoped>
-.homeInfo,.chart {
+.homeInfo, .chart {
   margin: 15px;
   display: flex;
 }
