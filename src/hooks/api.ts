@@ -14,11 +14,13 @@ apiInstance.interceptors.response.use(
                 message: response.data.message,
                 description: response.data.data,
             });
-        if (response.data.code === code.LOGIN_FAILED && window.location.pathname != "/login")
+        if (response.data.code === code.LOGIN_FAILED && window.location.pathname != "/login") {
             notification.error({
                 message: "失败",
                 description: response.data.message,
             });
+            window.location.pathname = "/login"
+        }
         return response;
     },
 );
