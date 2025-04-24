@@ -13,16 +13,11 @@ let userInfo = reactive<LoginInter>({
   userPassword: null,
   avatarPath: null
 })
-let forgetPasswordClick = ref(false)
 const loginStore = useLoginStore()
 const router = useRouter()
 
 function forgetPasswordOn() {
-  forgetPasswordClick.value = true
-}
-
-function forgetPasswordOff() {
-  forgetPasswordClick.value = false
+  router.push("/forgetPassword")
 }
 
 function getAvatar() {
@@ -138,11 +133,6 @@ loginStatus()
             <div class="button">
               <a-button type="primary" html-type="submit" @click="login">登录</a-button>
               <a-button type="primary" @click="forgetPasswordOn">忘记密码?</a-button>
-              <a-modal v-model:open="forgetPasswordClick" title="忘记密码" @ok="forgetPasswordOff"
-                       @cancel="forgetPasswordOff"
-                       centered ok-text="好的" cancel-text="取消">
-                <h1>占位</h1>
-              </a-modal>
             </div>
           </a-form>
         </div>

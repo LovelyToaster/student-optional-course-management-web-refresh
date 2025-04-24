@@ -3,6 +3,8 @@ import Login from "@/views/Login.vue";
 import Management from "@/views/management/Management.vue";
 import Home from "@/views/management/Home.vue";
 import GradeSearch from "@/views/management/grade/GradeSearch.vue";
+import ForgetPassword from "@/views/ForgetPassword.vue";
+import GradeStatistics from "@/views/management/grade/GradeStatistics.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,6 +16,10 @@ const router = createRouter({
         {
             path: "/login",
             component: Login
+        },
+        {
+            path: "/forgetPassword",
+            component: ForgetPassword
         },
         {
             path: "/management",
@@ -28,6 +34,10 @@ const router = createRouter({
                     path: "/management/grade/search",
                     component: GradeSearch,
                     name: "GradeSearch"
+                },{
+                    path: "/management/grade/statistics",
+                    component: GradeStatistics,
+                    name: "GradeStatistics"
                 }]
             }]
         }

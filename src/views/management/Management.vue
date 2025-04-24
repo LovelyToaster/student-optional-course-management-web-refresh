@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UserOutlined, LogoutOutlined, HomeOutlined, BookOutlined} from "@ant-design/icons-vue";
+import {UserOutlined, LogoutOutlined, HomeOutlined, BookOutlined,UnorderedListOutlined} from "@ant-design/icons-vue";
 import {useLoginStore, useStudentStore, useTeacherStore} from "@/store";
 import apiInstance from "@/hooks/api";
 import {ItemType, MenuProps, notification} from "ant-design-vue";
@@ -51,9 +51,14 @@ const teacherItems: ItemType[] = reactive([
 const studentItems: ItemType[] = reactive([
   getItem('主页', 'Home', () => h(HomeOutlined)),
 
-  getItem('成绩管理', 'GradeManagement', () => h(BookOutlined), [
-    getItem('我的成绩', 'GradeSearch')
-  ])
+  getItem('成绩管理', 'GradeManagement', () => h(UnorderedListOutlined), [
+    getItem('我的成绩', 'GradeSearch'),
+    getItem('成绩统计', 'GradeStatistics')
+  ]),
+  getItem("课程管理", 'CourseManagement', () => h(BookOutlined), [
+    getItem('课程选择', 'CourseSearch'),
+  ]),
+  getItem('个人信息', 'PersonalInformation', () => h(UserOutlined))
 
 ]);
 
