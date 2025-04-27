@@ -56,12 +56,15 @@ export const useStudentStore = defineStore("student", () => {
         averageGPA: "加载中",
     })
 
+    let gpaList = reactive([])
+
     function updateStudentInfo(info: StudentInfoInter) {
         Object.assign(studentInfo, info)
     }
 
     return {
         studentInfo,
+        gpaList,
         updateStudentInfo
     }
 },{

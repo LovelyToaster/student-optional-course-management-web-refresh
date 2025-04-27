@@ -90,8 +90,6 @@ function getUserData() {
   }
 }
 
-const gpaList = reactive([])
-
 function initChart() {
   const chart = new Chart({
     container: 'gpaChart',
@@ -100,7 +98,7 @@ function initChart() {
 
   chart
       .data({
-        value: gpaList,
+        value: studentStore.gpaList,
         transform: [
           {
             type: 'rename',
@@ -145,7 +143,7 @@ function getGPA() {
         const sortedGPA = res.data.data.GPA.sort((a: any, b: any) => {
           return a.term.localeCompare(b.term)
         })
-        Object.assign(gpaList, sortedGPA)
+        Object.assign(studentStore.gpaList, sortedGPA)
         initChart()
       }
     })
