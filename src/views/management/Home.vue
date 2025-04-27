@@ -168,7 +168,7 @@ getUserData()
       </a-avatar>
       <div class="info">
         <div>姓名: {{
-            loginStore.userInfo.permissions === 1 ? teacherStore.teacherInfo.teacherName : studentStore.studentInfo.studentName
+            loginStore.userInfo.permissions === 2 ? studentStore.studentInfo.studentName : teacherStore.teacherInfo.teacherName
           }}
         </div>
         <div v-if="loginStore.userInfo.permissions===1">编号: {{ teacherStore.teacherInfo.teacherNo }}</div>
@@ -186,7 +186,7 @@ getUserData()
     <a-card style="width: calc(80vw - 30px)" title="个人信息">
       <a-spin :spinning="dataSpinning">
         <a-descriptions bordered>
-          <template v-for="label in loginStore.userInfo.permissions === 1 ? teacherTable : studentTable">
+          <template v-for="label in loginStore.userInfo.permissions === 2 ? studentTable : teacherTable">
             <a-descriptions-item :label="label.name">
               {{ data[label.key] }}
             </a-descriptions-item>

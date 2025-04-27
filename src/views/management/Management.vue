@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UserOutlined, LogoutOutlined, HomeOutlined, BookOutlined,UnorderedListOutlined} from "@ant-design/icons-vue";
+import {UserOutlined, LogoutOutlined, HomeOutlined, BookOutlined, UnorderedListOutlined} from "@ant-design/icons-vue";
 import {useLoginStore, useStudentStore, useTeacherStore} from "@/store";
 import apiInstance from "@/hooks/api";
 import {ItemType, MenuProps, notification} from "ant-design-vue";
@@ -42,6 +42,10 @@ function getItem(
     type,
   } as ItemType;
 }
+
+const rootItems: ItemType[] = reactive([
+  getItem('主页', 'Home', () => h(HomeOutlined)),
+])
 
 const teacherItems: ItemType[] = reactive([
   getItem('主页', 'Home', () => h(HomeOutlined)),
@@ -100,7 +104,7 @@ getUserInfo()
           style="width: 100%"
           mode="inline"
           theme="dark"
-          :items="loginStore.userInfo.permissions===1?teacherItems:studentItems"
+          :items="loginStore.userInfo.permissions===0?rootItems:loginStore.userInfo.permissions===1?teacherItems:studentItems"
           @click="handleClick"
       ></a-menu>
     </a-layout-sider>
