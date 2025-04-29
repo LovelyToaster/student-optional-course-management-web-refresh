@@ -41,12 +41,12 @@ const teacherTable = [
     key: "teacherJob"
   },
   {
-    name: "毕业院校",
-    key: "teacherGraduateInstitutions"
+    name: "所属院系",
+    key: "facultyName"
   },
   {
-    name: "状态",
-    key: "teacherStatus"
+    name: "毕业院校",
+    key: "teacherGraduateInstitutions"
   }
 ]
 

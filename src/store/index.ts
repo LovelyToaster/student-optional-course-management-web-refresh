@@ -30,7 +30,7 @@ export const useTeacherStore = defineStore("teacher", () => {
         teacherDegree: "加载中",
         teacherJob: "加载中",
         teacherGraduateInstitutions: "加载中",
-        teacherStatus: "加载中"
+        facultyName: "加载中"
     })
 
     function updateTeacherInfo(info: TeacherInfoInter) {

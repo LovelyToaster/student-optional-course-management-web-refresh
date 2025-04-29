@@ -13,7 +13,7 @@ export interface TeacherInfoInter {
     teacherDegree: string,
     teacherJob: string,
     teacherGraduateInstitutions: string,
-    teacherStatus: string
+    facultyName: string
 }
 
 export interface StudentInfoInter {
