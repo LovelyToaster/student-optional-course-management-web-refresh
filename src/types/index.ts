@@ -21,7 +21,7 @@ export interface StudentInfoInter {
     studentName: string,
     studentSex: string,
     studentAge: string,
-    studentFaculties: string,
-    studentClass: string,
+    facultyName: string,
+    className: string,
     averageGPA: string
 }

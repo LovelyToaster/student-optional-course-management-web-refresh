@@ -69,11 +69,11 @@ const studentTable = [
   },
   {
     name: "学院",
-    key: "studentFaculties"
+    key: "facultyName"
   },
   {
     name: "班级",
-    key: "studentClass"
+    key: "className"
   }
 ]
 

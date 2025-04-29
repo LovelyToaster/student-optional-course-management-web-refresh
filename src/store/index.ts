@@ -18,8 +18,8 @@ export const useLoginStore = defineStore("login", () => {
         userInfo,
         updateUserInfo
     }
-},{
-    persist:true
+}, {
+    persist: true
 })
 export const useTeacherStore = defineStore("teacher", () => {
     let teacherInfo = reactive<TeacherInfoInter>({
@@ -41,8 +41,8 @@ export const useTeacherStore = defineStore("teacher", () => {
         teacherInfo,
         updateTeacherInfo
     }
-},{
-    persist:true
+}, {
+    persist: true
 })
 
 export const useStudentStore = defineStore("student", () => {
@@ -51,8 +51,8 @@ export const useStudentStore = defineStore("student", () => {
         studentName: "加载中",
         studentSex: "加载中",
         studentAge: "加载中",
-        studentFaculties: "加载中",
-        studentClass: "加载中",
+        facultyName: "加载中",
+        className: "加载中",
         averageGPA: "加载中",
     })
 
@@ -67,6 +67,6 @@ export const useStudentStore = defineStore("student", () => {
         gpaList,
         updateStudentInfo
     }
-},{
-    persist:true
+}, {
+    persist: true
 })
