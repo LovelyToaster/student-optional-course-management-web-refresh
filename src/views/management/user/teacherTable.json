@@ -1,0 +1,116 @@
+{
+  "columns": [
+    {
+      "title": "编号",
+      "dataIndex": "teacherNo",
+      "key": "teacherNo",
+      "input": {
+        "type": "input",
+        "disabled": true,
+        "defaultValue": "系统自动生成"
+      }
+    },
+    {
+      "title": "姓名",
+      "dataIndex": "teacherName",
+      "key": "teacherName",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "姓名",
+        "key": "teacherName"
+      }
+    },
+    {
+      "title": "性别",
+      "dataIndex": "teacherSex",
+      "key": "teacherSex",
+      "input": {
+        "type": "radio",
+        "options": [
+          "男",
+          "女"
+        ]
+      },
+      "excel": {
+        "name": "性别",
+        "key": "teacherSex"
+      }
+    },
+    {
+      "title": "年龄",
+      "dataIndex": "teacherAge",
+      "key": "teacherAge",
+      "input": {
+        "type": "number",
+        "options": {
+          "min": 20,
+          "max": 90
+        }
+      },
+      "excel": {
+        "name": "年龄",
+        "key": "teacherAge"
+      }
+    },
+    {
+      "title": "学历",
+      "dataIndex": "teacherDegree",
+      "key": "teacherDegree",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "学历",
+        "key": "teacherDegree"
+      }
+    },
+    {
+      "title": "职称",
+      "dataIndex": "teacherJob",
+      "key": "teacherJob",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "职称",
+        "key": "teacherJob"
+      }
+    },
+    {
+      "title": "院系",
+      "dataIndex": "facultyName",
+      "key": "facultyName",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "faculty",
+        "option": "facultyName",
+        "optionKey": "facultyNo"
+      },
+      "excel": {
+        "name": "院系",
+        "key": "facultyNo"
+      }
+    },
+    {
+      "title": "毕业院校",
+      "dataIndex": "teacherGraduateInstitutions",
+      "key": "teacherGraduateInstitutions",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "职称",
+        "key": "teacherGraduateInstitutions"
+      }
+    },
+    {
+      "title": "操作",
+      "dataIndex": "action",
+      "key": "action"
+    }
+  ]
+}
