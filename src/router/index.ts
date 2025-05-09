@@ -8,6 +8,7 @@ import GradeStatistics from "@/views/management/grade/GradeStatistics.vue";
 import StudentManagement from "@/views/management/user/StudentManagement.vue";
 import TeacherManagement from "@/views/management/user/TeacherManagement.vue";
 import FacultyManagement from "@/views/management/faculty/FacultyManagement.vue";
+import MajorManagement from "@/views/management/major/MajorManagement.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -62,6 +63,13 @@ const router = createRouter({
                     path: "/management/faculty/management",
                     component: FacultyManagement,
                     name: "FacultyManagement"
+                }]
+            }, {
+                path: "/management/major",
+                children: [{
+                    path: "/management/major/management",
+                    component: MajorManagement,
+                    name: "MajorManagement"
                 }]
             }]
         }

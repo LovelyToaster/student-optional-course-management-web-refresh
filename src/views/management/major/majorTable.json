@@ -1,0 +1,48 @@
+{
+  "columns": [
+    {
+      "title": "编号",
+      "dataIndex": "majorNo",
+      "key": "majorNo",
+      "input": {
+        "type": "input",
+        "disabled": true,
+        "defaultValue": "系统自动生成"
+      }
+    },
+    {
+      "title": "名称",
+      "dataIndex": "majorName",
+      "key": "majorName",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "名称",
+        "key": "majorName"
+      }
+    },
+    {
+      "title": "院系",
+      "dataIndex": "facultyName",
+      "key": "facultyName",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "faculty",
+        "option": "facultyName",
+        "optionKey": "facultyNo"
+      },
+      "excel": {
+        "name": "院系",
+        "key": "facultyNo"
+      }
+    },
+    {
+      "title": "操作",
+      "dataIndex": "action",
+      "key": "action"
+    }
+  ]
+}
