@@ -360,28 +360,46 @@ function tableChange() {
   editingKey.value = null
 }
 
-function selectChange(value, option) {
-  if (option.facultyNo && !option.majorNo) {
-    selectFilter.selectFaculty = option.facultyNo
-    editingData.majorNo = null
-    editingData.classNo = null
-  }
-  if (option.majorNo && !option.classNo) {
-    selectFilter.selectMajor = option.majorNo
-    editingData.classNo = null
+function checkSelectOption() {
+  const optionKeys = prop.columns
+      .map(col => col.select?.optionKey)
+      .filter(Boolean)
+
+  return {
+    isFaculty: optionKeys.includes('facultyNo'),
+    isMajor: optionKeys.includes('majorNo'),
+    isClass: optionKeys.includes('classNo')
   }
 }
 
+function selectChange(value, option) {
+  const verify = checkSelectOption()
+  if (verify.isFaculty && verify.isMajor && verify.isClass)
+    if (option.facultyNo && !option.majorNo) {
+      selectFilter.selectFaculty = option.facultyNo
+      editingData.majorNo = null
+      editingData.classNo = null
+    }
+  if (verify.isMajor && verify.isClass)
+    if (option.majorNo && !option.classNo) {
+      selectFilter.selectMajor = option.majorNo
+      editingData.classNo = null
+    }
+}
+
 function addSelectChange(value, option) {
-  if (option.facultyNo && !option.majorNo) {
-    selectFilter.selectFaculty = option.facultyNo
-    addData.majorNo = null
-    addData.classNo = null
-  }
-  if (option.majorNo && !option.classNo) {
-    selectFilter.selectMajor = option.majorNo
-    addData.classNo = null
-  }
+  const verify = checkSelectOption()
+  if (verify.isFaculty && verify.isMajor && verify.isClass)
+    if (option.facultyNo && !option.majorNo) {
+      selectFilter.selectFaculty = option.facultyNo
+      addData.majorNo = null
+      addData.classNo = null
+    }
+  if (verify.isMajor && verify.isClass)
+    if (option.majorNo && !option.classNo) {
+      selectFilter.selectMajor = option.majorNo
+      addData.classNo = null
+    }
 }
 
 const emit = defineEmits(['updateSelectFilter'])
