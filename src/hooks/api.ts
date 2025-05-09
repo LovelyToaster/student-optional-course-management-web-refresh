@@ -30,6 +30,12 @@ apiInstance.interceptors.response.use(
                 description: error.response.data.data,
             });
         }
+        if (error.response.status === 409) {
+            notification.error({
+                message: error.response.data.message,
+                description: error.response.data.data,
+            });
+        }
         return Promise.reject(error);
     }
 );
