@@ -1,0 +1,60 @@
+{
+  "columns": [
+    {
+      "title": "编号",
+      "dataIndex": "facultyNo",
+      "key": "facultyNo",
+      "input": {
+        "type": "input",
+        "disabled": true,
+        "defaultValue": "系统自动生成"
+      }
+    },
+    {
+      "title": "名称",
+      "dataIndex": "facultyName",
+      "key": "facultyName",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "名称",
+        "key": "facultyName"
+      }
+    },
+    {
+      "title": "院长",
+      "dataIndex": "teacherName",
+      "key": "teacherName",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "teacher",
+        "option": "teacherName",
+        "optionKey": "teacherNo"
+      },
+      "excel": {
+        "name": "院长",
+        "key": "teacherNo"
+      }
+    },
+    {
+      "title": "工作地点",
+      "dataIndex": "officeLocation",
+      "key": "officeLocation",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "职称",
+        "key": "officeLocation"
+      }
+    },
+    {
+      "title": "操作",
+      "dataIndex": "action",
+      "key": "action"
+    }
+  ]
+}

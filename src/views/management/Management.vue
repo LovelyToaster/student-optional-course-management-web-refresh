@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import {UserOutlined, LogoutOutlined, HomeOutlined, BookOutlined, UnorderedListOutlined} from "@ant-design/icons-vue";
+import {
+  UserOutlined,
+  LogoutOutlined,
+  HomeOutlined,
+  BookOutlined,
+  UnorderedListOutlined,
+  BankOutlined
+} from "@ant-design/icons-vue";
 import {useLoginStore, useStudentStore, useTeacherStore} from "@/store";
 import apiInstance from "@/hooks/api";
 import {ItemType, MenuProps, notification} from "ant-design-vue";
@@ -49,6 +56,7 @@ const rootItems: ItemType[] = reactive([
     getItem('学生管理', 'StudentManagement'),
     getItem('教师信息', 'TeacherManagement'),
   ]),
+  getItem('院系管理', 'FacultyManagement', () => h(BankOutlined)),
 ])
 
 const teacherItems: ItemType[] = reactive([

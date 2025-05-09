@@ -7,6 +7,7 @@ import ForgetPassword from "@/views/ForgetPassword.vue";
 import GradeStatistics from "@/views/management/grade/GradeStatistics.vue";
 import StudentManagement from "@/views/management/user/StudentManagement.vue";
 import TeacherManagement from "@/views/management/user/TeacherManagement.vue";
+import FacultyManagement from "@/views/management/faculty/FacultyManagement.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -54,6 +55,13 @@ const router = createRouter({
                     path: "/management/teacher/management",
                     component: TeacherManagement,
                     name: "TeacherManagement"
+                }]
+            }, {
+                path: "/management/faculty",
+                children: [{
+                    path: "/management/faculty/management",
+                    component: FacultyManagement,
+                    name: "FacultyManagement"
                 }]
             }]
         }
