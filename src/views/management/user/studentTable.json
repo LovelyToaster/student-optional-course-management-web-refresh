@@ -1,0 +1,107 @@
+{
+  "columns": [
+    {
+      "title": "学号",
+      "dataIndex": "studentNo",
+      "key": "studentNo",
+      "input": {
+        "type": "input",
+        "disabled": true,
+        "defaultValue": "系统自动生成"
+      }
+    },
+    {
+      "title": "姓名",
+      "dataIndex": "studentName",
+      "key": "studentName",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "姓名",
+        "key": "studentName"
+      }
+    },
+    {
+      "title": "性别",
+      "dataIndex": "studentSex",
+      "key": "studentSex",
+      "input": {
+        "type": "radio",
+        "options": [
+          "男",
+          "女"
+        ]
+      },
+      "excel": {
+        "name": "性别",
+        "key": "studentSex"
+      }
+    },
+    {
+      "title": "年龄",
+      "dataIndex": "studentAge",
+      "key": "studentAge",
+      "input": {
+        "type": "number",
+        "options": {
+          "min": 16,
+          "max": 50
+        }
+      },
+      "excel": {
+        "name": "年龄",
+        "key": "studentAge"
+      }
+    },
+    {
+      "title": "院系",
+      "dataIndex": "facultyName",
+      "key": "facultyName",
+      "input": {
+        "type": "select",
+        "placeholder": "选择院系后方可选择专业和班级"
+      },
+      "select": {
+        "name": "faculty",
+        "option": "facultyName",
+        "optionKey": "facultyNo"
+      }
+    },
+    {
+      "title": "专业",
+      "dataIndex": "majorName",
+      "key": "majorName",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "major",
+        "option": "majorName",
+        "optionKey": "majorNo"
+      }
+    },
+    {
+      "title": "班级",
+      "dataIndex": "className",
+      "key": "className",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "class",
+        "option": "className",
+        "optionKey": "classNo"
+      },
+      "excel": {
+        "name": "班级",
+        "key": "classNo"
+      }
+    },
+    {
+      "title": "操作",
+      "dataIndex": "action",
+      "key": "action"
+    }
+  ]
+}

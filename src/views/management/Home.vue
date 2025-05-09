@@ -81,7 +81,7 @@ let data = null
 let dataSpinning = ref(true)
 
 function getUserData() {
-  if (loginStore.userInfo.permissions === 1) {
+  if (loginStore.userInfo.permissions === 0 || loginStore.userInfo.permissions === 1) {
     data = teacherStore.teacherInfo
     dataSpinning.value = false
   } else if (loginStore.userInfo.permissions === 2) {

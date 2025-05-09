@@ -9,11 +9,6 @@ apiInstance.defaults.headers.common["Content-Type"] = "application/x-www-form-ur
 apiInstance.defaults.withCredentials = true
 apiInstance.interceptors.response.use(
     (response) => {
-        if (response.data.code === code.SERVICE_FAILED)
-            notification.error({
-                message: response.data.message,
-                description: response.data.data,
-            });
         if (response.data.code === code.LOGIN_FAILED && window.location.pathname != "/login") {
             notification.error({
                 message: "失败",
@@ -23,5 +18,19 @@ apiInstance.interceptors.response.use(
         }
         return response;
     },
+    (error) => {
+        const config = error.config;
+
+        if (config.skipInterceptor) {
+            return Promise.reject(error);
+        }
+        if (error.response.status === 500) {
+            notification.error({
+                message: error.response.data.message,
+                description: error.response.data.data,
+            });
+        }
+        return Promise.reject(error);
+    }
 );
 export default apiInstance;

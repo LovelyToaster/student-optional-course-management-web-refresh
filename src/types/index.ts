@@ -23,5 +23,6 @@ export interface StudentInfoInter {
     studentAge: string,
     facultyName: string,
     className: string,
+    majorName: string,
     averageGPA: string
 }

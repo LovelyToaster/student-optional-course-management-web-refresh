@@ -45,6 +45,10 @@ function getItem(
 
 const rootItems: ItemType[] = reactive([
   getItem('主页', 'Home', () => h(HomeOutlined)),
+  getItem('人员管理', 'UserManagement', () => h(UserOutlined), [
+    getItem('学生管理', 'StudentManagement'),
+    getItem('教师信息', 'TeacherManagement'),
+  ]),
 ])
 
 const teacherItems: ItemType[] = reactive([
@@ -71,7 +75,7 @@ const handleClick: MenuProps['onClick'] = e => {
 };
 
 function getUserInfo() {
-  if (loginStore.userInfo.permissions === 1) {
+  if (loginStore.userInfo.permissions === 0 || loginStore.userInfo.permissions === 1) {
     apiInstance.post("/teacher/search", {
       teacherNo: loginStore.userInfo.userName
     }).then((res) => {

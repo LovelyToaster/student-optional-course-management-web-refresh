@@ -53,6 +53,7 @@ export const useStudentStore = defineStore("student", () => {
         studentAge: "加载中",
         facultyName: "加载中",
         className: "加载中",
+        majorName: "加载中",
         averageGPA: "加载中",
     })
 
