@@ -133,15 +133,27 @@ function customRequest({file, onSuccess, onError}) {
         }
       })
           .then((response) => {
-            notification.success({
-              message: '上传成功',
-              description: response.data.message,
-              key: 'excelUpload'
-            });
-            onSuccess(response.data);
-            const addData = response.data.data.flat();
+            if (response.data.code === code.ADD_SUCCESS) {
+              notification.success({
+                message: '上传成功',
+                description: response.data.message,
+                key: 'excelUpload'
+              });
+              onSuccess(response.data);
+              const addData = response.data.data.flat();
 
-            data.push(...addData);
+              data.push(...addData);
+            } else if (response.data.code === code.ADD_FAILED) {
+              notification.error({
+                message: '上传失败',
+                description: response.data.message,
+                key: 'excelUpload'
+              });
+              onError(response.data);
+              const addData = response.data.data.flat();
+
+              data.push(...addData);
+            }
           })
           .catch((error) => {
             notification.error({
