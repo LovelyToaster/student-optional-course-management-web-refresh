@@ -1,0 +1,78 @@
+{
+  "columns": [
+    {
+      "title": "编号",
+      "dataIndex": "courseNo",
+      "key": "courseNo",
+      "input": {
+        "type": "input",
+        "disabled": true,
+        "defaultValue": "系统自动生成"
+      }
+    },
+    {
+      "title": "名称",
+      "dataIndex": "courseName",
+      "key": "courseName",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "名称",
+        "key": "courseName"
+      }
+    },
+    {
+      "title": "教师",
+      "dataIndex": "teacherName",
+      "key": "teacherName",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "teacher",
+        "option": "teacherName",
+        "optionKey": "teacherNo"
+      },
+      "excel": {
+        "name": "教师",
+        "key": "teacherNo"
+      }
+    },
+    {
+      "title": "学分",
+      "dataIndex": "courseGrade",
+      "key": "courseGrade",
+      "input": {
+        "type": "number",
+        "options": {
+          "min": 0
+        }
+      },
+      "excel": {
+        "name": "学分",
+        "key": "courseGrade"
+      }
+    },
+    {
+      "title": "学时",
+      "dataIndex": "courseTime",
+      "key": "courseTime",
+      "input": {
+        "type": "number",
+        "options": {
+          "min": 0
+        }
+      },
+      "excel": {
+        "name": "年龄",
+        "key": "courseTime"
+      }
+    },
+    {
+      "title": "操作",
+      "dataIndex": "action",
+      "key": "action"
+    }
+  ]
+}
