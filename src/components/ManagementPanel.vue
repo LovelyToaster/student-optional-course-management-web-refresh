@@ -380,6 +380,11 @@ function selectChange(value, option) {
       editingData.majorNo = null
       editingData.classNo = null
     }
+  if (verify.isFaculty && verify.isMajor)
+    if (option.facultyNo && !option.majorNo) {
+      selectFilter.selectFaculty = option.facultyNo
+      editingData.majorNo = null
+    }
   if (verify.isMajor && verify.isClass)
     if (option.majorNo && !option.classNo) {
       selectFilter.selectMajor = option.majorNo
@@ -394,6 +399,11 @@ function addSelectChange(value, option) {
       selectFilter.selectFaculty = option.facultyNo
       addData.majorNo = null
       addData.classNo = null
+    }
+  if (verify.isFaculty && verify.isMajor)
+    if (option.facultyNo && !option.majorNo) {
+      selectFilter.selectFaculty = option.facultyNo
+      addData.majorNo = null
     }
   if (verify.isMajor && verify.isClass)
     if (option.majorNo && !option.classNo) {

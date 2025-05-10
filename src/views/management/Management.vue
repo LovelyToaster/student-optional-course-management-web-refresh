@@ -6,7 +6,8 @@ import {
   BookOutlined,
   UnorderedListOutlined,
   BankOutlined,
-  BarsOutlined
+  BarsOutlined,
+  InsertRowBelowOutlined
 } from "@ant-design/icons-vue";
 import {useLoginStore, useStudentStore, useTeacherStore} from "@/store";
 import apiInstance from "@/hooks/api";
@@ -59,6 +60,7 @@ const rootItems: ItemType[] = reactive([
   ]),
   getItem('院系管理', 'FacultyManagement', () => h(BankOutlined)),
   getItem('专业管理', 'MajorManagement', () => h(BarsOutlined),),
+  getItem('班级管理', 'ClassManagement', () => h(InsertRowBelowOutlined),),
 ])
 
 const teacherItems: ItemType[] = reactive([

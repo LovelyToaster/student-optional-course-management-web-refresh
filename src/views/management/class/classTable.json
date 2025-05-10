@@ -1,0 +1,61 @@
+{
+  "columns": [
+    {
+      "title": "编号",
+      "dataIndex": "classNo",
+      "key": "classNo",
+      "input": {
+        "type": "input",
+        "disabled": true,
+        "defaultValue": "系统自动生成"
+      }
+    },
+    {
+      "title": "名称",
+      "dataIndex": "className",
+      "key": "className",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "名称",
+        "key": "className"
+      }
+    },
+    {
+      "title": "院系",
+      "dataIndex": "facultyName",
+      "key": "facultyName",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "faculty",
+        "option": "facultyName",
+        "optionKey": "facultyNo"
+      }
+    },
+    {
+      "title": "专业",
+      "dataIndex": "majorName",
+      "key": "majorName",
+      "input": {
+        "type": "select"
+      },
+      "select": {
+        "name": "major",
+        "option": "majorName",
+        "optionKey": "majorNo"
+      },
+      "excel": {
+        "name": "专业",
+        "key": "majorNo"
+      }
+    },
+    {
+      "title": "操作",
+      "dataIndex": "action",
+      "key": "action"
+    }
+  ]
+}
