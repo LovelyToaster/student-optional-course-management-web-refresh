@@ -108,6 +108,18 @@
       }
     },
     {
+      "title": "邮箱",
+      "dataIndex": "email",
+      "key": "email",
+      "input": {
+        "type": "input"
+      },
+      "excel": {
+        "name": "邮箱",
+        "key": "email"
+      }
+    },
+    {
       "title": "操作",
       "dataIndex": "action",
       "key": "action"

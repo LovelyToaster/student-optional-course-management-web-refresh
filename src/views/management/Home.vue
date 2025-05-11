@@ -47,6 +47,9 @@ const teacherTable = [
   {
     name: "毕业院校",
     key: "teacherGraduateInstitutions"
+  }, {
+    name: "邮箱",
+    key: "email"
   }
 ]
 
@@ -74,6 +77,9 @@ const studentTable = [
   {
     name: "班级",
     key: "className"
+  }, {
+    name: "邮箱",
+    key: "email"
   }
 ]
 

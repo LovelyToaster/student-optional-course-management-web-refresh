@@ -332,7 +332,7 @@ function saveRow() {
       const index = data.findIndex(item => item.key === editingKey.value);
       if (index !== -1)
         Object.assign(data[index], editingData)
-    } else if (res.data.code === code.MODIFY_FAILED) {
+    } else {
       notification.error({
         message: '错误',
         description: res.data.message

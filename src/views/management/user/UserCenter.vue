@@ -47,6 +47,9 @@ const teacherTable = [
   {
     name: "毕业院校",
     key: "teacherGraduateInstitutions"
+  }, {
+    name: "邮箱",
+    key: "email"
   }
 ]
 
@@ -74,6 +77,9 @@ const studentTable = [
   {
     name: "班级",
     key: "className"
+  }, {
+    name: "邮箱",
+    key: "email"
   }
 ]
 
@@ -174,9 +180,7 @@ function changePassword() {
         message: '成功',
         description: res.data.message
       })
-      nowPassword.value = null
-      newPassword.value = null
-      newPasswordConfirm.value = null
+      resetPassword()
       setTimeout(() => {
         router.push('/login')
       }, 3000)
@@ -254,9 +258,13 @@ function changeEmail() {
         message: '成功',
         description: res.data.message
       })
-      nowEmail.value = null
-      newEmail.value = null
-      emailCode.value = null
+      if (loginStore.userInfo.permissions === 2) {
+        studentStore.studentInfo.email = newEmail.value
+      } else {
+        teacherStore.teacherInfo.email = newEmail.value
+      }
+      activeTabKey.value = '1'
+      resetEmail()
     }
     if (res.data.code === code.CODE_VERIFY_FAILED) {
       notification.error({
@@ -276,6 +284,37 @@ function resetEmail() {
   nowEmail.value = null
   newEmail.value = null
   emailCode.value = null
+}
+
+function initEmail() {
+  if (!emailVerify(nowEmail.value)) return
+  apiInstance.post("/user/initEmail", {
+    userName: loginStore.userInfo.userName,
+    email: nowEmail.value
+  }).then(res => {
+    if (res.data.code === code.EMAIL_SET_SUCCESS) {
+      notification.success({
+        message: '成功',
+        description: res.data.message
+      })
+      if (loginStore.userInfo.permissions === 2) {
+        studentStore.studentInfo.email = nowEmail.value
+      } else {
+        teacherStore.teacherInfo.email = nowEmail.value
+      }
+      resetEmail()
+    } else if (res.data.code === code.EMAIL_REPEAT) {
+      notification.error({
+        message: '错误',
+        description: res.data.message
+      })
+    }
+  }).catch(e => {
+    notification.error({
+      message: '错误',
+      description: e.data.message
+    })
+  })
 }
 
 getUserData()
@@ -360,6 +399,25 @@ getUserData()
                 </div>
                 <a-input placeholder="请输入新的邮箱" style="margin-top: 15px" v-model:value="newEmail"></a-input>
                 <a-button type="primary" style="margin-top: 15px" @click="changeEmail()">修改</a-button>
+                <a-button type="primary" danger style="margin:15px 0 0 15px" @click="resetEmail()">重置</a-button>
+              </a-form>
+            </div>
+          </a-tab-pane>
+          <a-tab-pane key="3"
+                      v-if="loginStore.userInfo.permissions === 2?studentStore.studentInfo.email===null||studentStore.studentInfo.email==='':teacherStore.teacherInfo.email===null||teacherStore.teacherInfo.email===''">
+            <template #tab>
+              <MailOutlined style="margin-right: 5px"/>
+              设置默认邮箱
+            </template>
+            <div style="width: 20%">
+              <a-form>
+                <a-input placeholder="请输入邮箱" style="margin-top: 15px" v-model:value="nowEmail"></a-input>
+                <div style="display: flex;margin-top: 15px">
+                  <a-input placeholder="请输入验证码" v-model:value="emailCode"></a-input>
+                  <a-button type="primary" style="margin-left: 5px" @click="sendCode()" :loading="sendLoading">发送验证码
+                  </a-button>
+                </div>
+                <a-button type="primary" style="margin-top: 15px" @click="initEmail()">修改</a-button>
                 <a-button type="primary" danger style="margin:15px 0 0 15px" @click="resetEmail()">重置</a-button>
               </a-form>
             </div>

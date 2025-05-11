@@ -13,7 +13,8 @@ export interface TeacherInfoInter {
     teacherDegree: string,
     teacherJob: string,
     teacherGraduateInstitutions: string,
-    facultyName: string
+    facultyName: string,
+    email: string
 }
 
 export interface StudentInfoInter {
@@ -24,5 +25,6 @@ export interface StudentInfoInter {
     facultyName: string,
     className: string,
     majorName: string,
-    averageGPA: string
+    averageGPA: string,
+    email: string
 }
