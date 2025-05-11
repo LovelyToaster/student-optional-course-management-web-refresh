@@ -11,6 +11,7 @@ import FacultyManagement from "@/views/management/faculty/FacultyManagement.vue"
 import MajorManagement from "@/views/management/major/MajorManagement.vue";
 import ClassManagement from "@/views/management/class/ClassManagement.vue";
 import CourseManagement from "@/views/management/course/CourseManagement.vue";
+import UserCenter from "@/views/management/user/UserCenter.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -87,6 +88,10 @@ const router = createRouter({
                     component: CourseManagement,
                     name: "CourseManagement"
                 }]
+            }, {
+                path: "/management/user",
+                component: UserCenter,
+                name: "UserCenter"
             }]
         }
     ]

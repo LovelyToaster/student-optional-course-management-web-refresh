@@ -61,12 +61,15 @@ const rootItems: ItemType[] = reactive([
   getItem('院系管理', 'FacultyManagement', () => h(BankOutlined)),
   getItem('专业管理', 'MajorManagement', () => h(BarsOutlined),),
   getItem('班级管理', 'ClassManagement', () => h(InsertRowBelowOutlined),),
-  getItem('课程管理', 'CourseManagement', () => h(BookOutlined))
+  getItem('课程管理', 'CourseManagement', () => h(BookOutlined)),
+
+  getItem('个人中心', 'UserCenter', () => h(UserOutlined))
 ])
 
 const teacherItems: ItemType[] = reactive([
   getItem('主页', 'Home', () => h(HomeOutlined)),
 
+  getItem('个人中心', 'UserCenter', () => h(UserOutlined))
 ]);
 
 const studentItems: ItemType[] = reactive([
@@ -79,7 +82,7 @@ const studentItems: ItemType[] = reactive([
   getItem("课程管理", 'CourseManagement', () => h(BookOutlined), [
     getItem('课程选择', 'CourseSearch'),
   ]),
-  getItem('个人信息', 'PersonalInformation', () => h(UserOutlined))
+  getItem('个人信息', 'UserCenter', () => h(UserOutlined))
 
 ]);
 
