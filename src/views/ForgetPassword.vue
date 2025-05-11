@@ -76,7 +76,7 @@ function confirmPassword() {
   }).catch(e => {
     notification.error({
       message: '错误',
-      description: res.data.message
+      description: e.data.message
     })
   })
 }
