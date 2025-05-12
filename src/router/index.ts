@@ -15,6 +15,7 @@ import UserCenter from "@/views/management/user/UserCenter.vue";
 import CourseTask from "@/views/management/course/CourseTask.vue";
 import CourseOptional from "@/views/management/course/CourseOptional.vue";
 import GradeInput from "@/views/management/grade/GradeInput.vue";
+import GradeStatisticsTeacher from "@/views/management/grade/GradeStatisticsTeacher.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -52,6 +53,10 @@ const router = createRouter({
                     path: "/management/grade/input",
                     component: GradeInput,
                     name: "GradeInput"
+                }, {
+                    path: "/management/grade/teacherStatistics",
+                    component: GradeStatisticsTeacher,
+                    name: "GradeStatisticsTeacher"
                 }]
             }, {
                 path: "/management/student",

@@ -12,11 +12,13 @@ onMounted(() => {
   const gradeStatistics = reactive([])
   apiInstance.get("/grade/getGradeStatistics", {
     params: {
+      teacherNo: "",
       studentNo: loginStore.userInfo.userName
     }
   }).then(res => {
     if (res.data.code === code.SEARCH_SUCCESS) {
       Object.assign(gradeStatistics, res.data.data)
+      console.log(gradeStatistics)
       const chart = new Chart({
         container: 'container',
         autoFit: true,

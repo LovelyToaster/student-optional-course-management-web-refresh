@@ -147,8 +147,24 @@ function getGPA() {
       if (res.data.code === code.SEARCH_SUCCESS) {
         data.averageGPA = res.data.data.averageGPA
         const sortedGPA = res.data.data.GPA.sort((a: any, b: any) => {
-          return a.term.localeCompare(b.term)
-        })
+          const parseTerm = (term: string) => {
+            const [yearPart, semesterPart] = term.split(" ");
+            const [startYear, endYear] = yearPart.split("-").map(Number);
+            const semesterNum = semesterPart.includes("第一") ? 1 : 2;
+            return {startYear, endYear, semesterNum};
+          };
+
+          const termA = parseTerm(a.term);
+          const termB = parseTerm(b.term);
+
+          if (termA.startYear !== termB.startYear) {
+            return termA.startYear - termB.startYear;
+          }
+          if (termA.endYear !== termB.endYear) {
+            return termA.endYear - termB.endYear;
+          }
+          return termA.semesterNum - termB.semesterNum;
+        });
         Object.assign(studentStore.gpaList, sortedGPA)
         initChart()
       }
