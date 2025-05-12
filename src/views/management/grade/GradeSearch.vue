@@ -27,6 +27,10 @@ function getAcademicYears() {
     if (item.term) {
       termSet.add(item.term)
     }
+    if (item.grade < 0) {
+      item.grade = "暂无"
+      item.coursePoint = "暂无"
+    }
   })
   Object.assign(academicYears, Array.from(termSet).sort())
 }
