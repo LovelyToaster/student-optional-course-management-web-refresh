@@ -72,6 +72,10 @@ const rootItems: ItemType[] = reactive([
 const teacherItems: ItemType[] = reactive([
   getItem('主页', 'Home', () => h(HomeOutlined)),
 
+  getItem('成绩管理', 'GradeManagement', () => h(UnorderedListOutlined), [
+    getItem('成绩录入', 'GradeInput')
+  ]),
+
   getItem('个人中心', 'UserCenter', () => h(UserOutlined))
 ]);
 
