@@ -61,7 +61,10 @@ const rootItems: ItemType[] = reactive([
   getItem('院系管理', 'FacultyManagement', () => h(BankOutlined)),
   getItem('专业管理', 'MajorManagement', () => h(BarsOutlined),),
   getItem('班级管理', 'ClassManagement', () => h(InsertRowBelowOutlined),),
-  getItem('课程管理', 'CourseManagement', () => h(BookOutlined)),
+  getItem('课程信息', 'CourseInfo', () => h(BookOutlined), [
+    getItem('课程管理', 'CourseManagement'),
+    getItem('选课管理', 'CourseTask')
+  ]),
 
   getItem('个人中心', 'UserCenter', () => h(UserOutlined))
 ])
@@ -80,7 +83,7 @@ const studentItems: ItemType[] = reactive([
     getItem('成绩统计', 'GradeStatistics')
   ]),
   getItem("课程管理", 'CourseManagement', () => h(BookOutlined), [
-    getItem('课程选择', 'CourseSearch'),
+    getItem('课程选择', 'CourseOptional'),
   ]),
   getItem('个人信息', 'UserCenter', () => h(UserOutlined))
 
@@ -141,7 +144,7 @@ getUserInfo()
           </a-avatar>
         </div>
       </a-layout-header>
-      <a-layout-content>
+      <a-layout-content style="overflow-y: auto;  max-height: calc(100vh - 64px);">
         <RouterView></RouterView>
       </a-layout-content>
     </a-layout>

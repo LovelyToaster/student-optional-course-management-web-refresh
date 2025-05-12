@@ -12,6 +12,8 @@ import MajorManagement from "@/views/management/major/MajorManagement.vue";
 import ClassManagement from "@/views/management/class/ClassManagement.vue";
 import CourseManagement from "@/views/management/course/CourseManagement.vue";
 import UserCenter from "@/views/management/user/UserCenter.vue";
+import CourseTask from "@/views/management/course/CourseTask.vue";
+import CourseOptional from "@/views/management/course/CourseOptional.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -87,6 +89,14 @@ const router = createRouter({
                     path: "/management/course/management",
                     component: CourseManagement,
                     name: "CourseManagement"
+                }, {
+                    path: "/management/course/task",
+                    component: CourseTask,
+                    name: "CourseTask"
+                }, {
+                    path: "/management/course/optional",
+                    component: CourseOptional,
+                    name: "CourseOptional"
                 }]
             }, {
                 path: "/management/user",
