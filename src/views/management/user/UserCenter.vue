@@ -384,7 +384,8 @@ getUserData()
             <a-button type="primary" style="margin-top: 15px" @click="changePassword()">修改</a-button>
             <a-button type="primary" danger style="margin:15px 0 0 15px" @click="resetPassword()">重置</a-button>
           </a-tab-pane>
-          <a-tab-pane key="2">
+          <a-tab-pane key="2"
+                      v-if="loginStore.userInfo.permissions === 2?studentStore.studentInfo.email!=null:teacherStore.teacherInfo.email!=null">
             <template #tab>
               <MailOutlined style="margin-right: 5px"/>
               修改邮箱
