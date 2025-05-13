@@ -159,7 +159,8 @@ getGrade()
         </template>
         <template v-else>
           <template v-if="editingKey === record.no">
-            <a-input-number v-if="column.dataIndex === 'displayGrade'" v-model:value="editingGrade"/>
+            <a-input-number v-if="column.dataIndex === 'displayGrade'" v-model:value="editingGrade" :min="0"
+                            :max="100"/>
           </template>
           <template v-else>
             {{ record[column.dataIndex] }}
