@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script setup>
 
 import {useLoginStore} from "@/store";
-import {reactive, ref} from "vue";
+import {computed, reactive, ref} from "vue";
 import apiInstance from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
@@ -150,6 +150,25 @@ function cancelCourse(record) {
   })
 }
 
+function getFilters(key) {
+  const values = [...new Set(tableData.map(item => item[key]))]
+  return values.map(val => ({text: String(val), value: val}))
+}
+
+const columns = computed(() => {
+  return tableColumns.map(item => {
+    if (item.dataIndex !== 'action') {
+      return {
+        ...item,
+        filters: getFilters(item.dataIndex),
+        onFilter: (value, record) => record[item.dataIndex] === value,
+        filterSearch: true
+      }
+    }
+    return item
+  })
+})
+
 getCourseData()
 </script>
 
@@ -201,7 +220,7 @@ getCourseData()
     <a-button type="primary" @click="closeOptional">
       返回
     </a-button>
-    <a-table style="margin-top: 10px" :columns="tableColumns" :dataSource="tableData"
+    <a-table style="margin-top: 10px" :columns="columns" :dataSource="tableData"
              :pagination="{ pageSize: 8 }">
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'action'">
