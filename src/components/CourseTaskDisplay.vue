@@ -169,14 +169,35 @@ const columns = computed(() => {
   })
 })
 
+function deleteTask(task) {
+  apiInstance.post("/courseTask/delete", {
+    courseTaskNo: task.courseTaskNo
+  }).then(res => {
+    if (res.data.code === code.DELETE_SUCCESS) {
+      notification.success({
+        message: "成功",
+        description: res.data.message
+      })
+      prop.taskData.splice(prop.taskData.indexOf(task), 1)
+    } else {
+      notification.error({
+        message: "错误",
+        description: res.data.message
+      })
+    }
+  })
+}
+
 getCourseData()
 </script>
 
 <template>
   <a-card v-if="taskData.length > 0&& !isOptional" v-for="task in taskData" :key="task.no" style="margin: 15px">
-    <template #extra v-if="loginStore.userInfo.permissions===0">
-      <a-button type="text" danger size="small">删除</a-button>
-    </template>
+    <div style="margin-bottom: 15px" v-if="loginStore.userInfo.permissions===0">
+      <a-popconfirm title="确定删除吗" @confirm="deleteTask(task)" style="text-align: center">
+        <a-button type="text" danger size="small">删除</a-button>
+      </a-popconfirm>
+    </div>
 
     <div style="font-weight: bold; font-size: 30px; text-align: center">
       {{ task.term + "学生选课任务" }}
