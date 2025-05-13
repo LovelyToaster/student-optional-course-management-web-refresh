@@ -130,11 +130,12 @@ function inputGrade() {
         item.isGrade = false
       }
     })
-    editingKey.value = null
+    cancelInputGrade()
   })
 }
 
 function cancelInputGrade() {
+  editingGrade.value = null
   editingKey.value = null
 }
 
