@@ -141,6 +141,7 @@ function getGPA() {
   if (loginStore.userInfo.permissions === 2) {
     apiInstance.get("/grade/getGPA", {
       params: {
+        teacherNo: "",
         studentNo: loginStore.userInfo.userName
       }
     }).then(res => {
