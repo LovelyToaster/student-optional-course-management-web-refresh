@@ -2,8 +2,11 @@ import axios from "axios";
 import code from "./code";
 import {notification} from "ant-design-vue";
 
+const DEEPSEEK_API = import.meta.env.VITE_DEEPSEEK_URL
+const DEEPSEEK_KEY = import.meta.env.VITE_DEEPSEEK_KEY
+
 let isFailed = false
-const apiInstance = axios.create({
+export const apiInstance = axios.create({
     baseURL: 'http://localhost:8080',
 });
 apiInstance.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded"
@@ -56,4 +59,11 @@ apiInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-export default apiInstance;
+
+export const apiDeepSeek = axios.create({
+    baseURL: DEEPSEEK_API,
+    headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${DEEPSEEK_KEY}`
+    }
+})

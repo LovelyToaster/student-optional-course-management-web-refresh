@@ -3,9 +3,8 @@ import {UserOutlined, EditOutlined, KeyOutlined, MailOutlined} from '@ant-design
 import {ref} from "vue";
 import {useLoginStore, useStudentStore, useTeacherStore} from "@/store";
 import 'vue-cropper/dist/index.css'
-import {VueCropper} from "vue-cropper";
 import {notification} from "ant-design-vue";
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {useRouter} from "vue-router";
 

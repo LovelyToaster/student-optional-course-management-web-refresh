@@ -2,7 +2,7 @@
 import {useStudentStore} from "@/store";
 import {h, reactive, ref} from "vue";
 import {SearchOutlined, RestOutlined} from "@ant-design/icons-vue"
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
 

@@ -2,7 +2,7 @@
 
 import {useLoginStore} from "@/store";
 import {computed, reactive, ref} from "vue";
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
 

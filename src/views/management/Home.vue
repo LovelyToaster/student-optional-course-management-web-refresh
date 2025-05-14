@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {useLoginStore, useTeacherStore, useStudentStore} from '@/store';
 import {UserOutlined} from "@ant-design/icons-vue";
-import {onMounted, reactive, ref} from "vue";
-import apiInstance from "@/hooks/api";
+import {onMounted, ref} from "vue";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {Chart} from '@antv/g2';
 

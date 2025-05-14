@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import CourseTaskDisplay from "@/components/CourseTaskDisplay.vue";
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {reactive} from "vue";
 import {notification} from "ant-design-vue";

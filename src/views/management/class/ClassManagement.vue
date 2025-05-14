@@ -2,7 +2,7 @@
 import ManagementPanel from "@/components/ManagementPanel.vue";
 import jsonData from "./classTable.json"
 import {computed, reactive} from "vue";
-import apiInstance from "@/hooks/api.js";
+import {apiInstance} from "@/hooks/api.js";
 import code from "@/hooks/code.js";
 import {notification} from "ant-design-vue";
 

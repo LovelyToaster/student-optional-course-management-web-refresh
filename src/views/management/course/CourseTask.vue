@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {reactive, ref} from "vue";
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import dayjs from "dayjs";
 import {notification} from "ant-design-vue";

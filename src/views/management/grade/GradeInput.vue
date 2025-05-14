@@ -1,6 +1,6 @@
 <script setup>
 
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import {useTeacherStore} from "@/store";
 import {computed, reactive, ref} from "vue";
 import code from "@/hooks/code";

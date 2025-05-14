@@ -3,7 +3,7 @@ import {DeleteOutlined, DownloadOutlined, UploadOutlined} from '@ant-design/icon
 import * as XLSX from 'xlsx'
 import {computed, h, reactive, ref, toRaw, watch} from "vue";
 import {notification, Progress} from "ant-design-vue";
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 
 const prop = defineProps(['mark', 'cardTitle', 'excelName', 'columns', 'rawData', 'selectData'])

@@ -2,7 +2,7 @@
 import {onMounted, reactive, ref} from "vue";
 import {LoginInter} from "@/types";
 import {UserOutlined, KeyOutlined} from "@ant-design/icons-vue"
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {notification} from "ant-design-vue";
 import {useLoginStore} from "@/store";

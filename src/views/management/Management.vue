@@ -10,7 +10,7 @@ import {
   InsertRowBelowOutlined
 } from "@ant-design/icons-vue";
 import {useLoginStore, useStudentStore, useTeacherStore} from "@/store";
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import {ItemType, MenuProps, notification} from "ant-design-vue";
 import code from "@/hooks/code";
 import {useRouter} from "vue-router";

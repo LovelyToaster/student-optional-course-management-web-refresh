@@ -3,7 +3,7 @@ import {RollbackOutlined} from '@ant-design/icons-vue'
 import {useRouter} from "vue-router";
 import {ref} from "vue";
 import {notification} from "ant-design-vue";
-import apiInstance from "@/hooks/api";
+import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 
 const router = useRouter()
