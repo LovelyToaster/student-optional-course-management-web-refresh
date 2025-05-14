@@ -77,9 +77,11 @@ function getDeepseekSay() {
         其中-1分的成绩为暂未录入，不需要显示在概况中
 
         要求：
-        1. 概括整体成绩水平（优 / 良 / 中 / 及格 / 不及格）
-        2. 提出简要学习建议
-        3. 语言自然、简洁
+        1. 仅基于已录入的有效成绩进行分析（分数为 -1 的视为无效，请忽略）
+        2. 概括整体成绩水平（优 / 良 / 中 / 及格 / 不及格）
+        3. 提出简要学习建议
+        4. 需要包含Term学期和coursePoint绩点
+        5. 输出自然、简洁，不要包含任何无效成绩、统计说明或注释
         `
     apiDeepSeek.post("/chat/completions", {
       model: 'deepseek-chat',
@@ -108,7 +110,7 @@ function getDeepseekSay() {
       </div>
       <div style="margin-left: 15px;flex:1">
         <a-card title="成绩总结">
-          <a-button v-if="!isSay" type="primary" @click="getDeepseekSay">点击生成ai总结</a-button>
+          <a-button v-if="!isSay" type="primary" @click="getDeepseekSay">点击生成AI总结</a-button>
           <div v-if="isSay">
             <a-spin tip="等待生成中" :spinning="sayLoading" style="text-align: center">
               <div style="white-space: pre-line;min-height: 50px">
