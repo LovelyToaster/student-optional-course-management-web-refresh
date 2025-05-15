@@ -16,6 +16,8 @@ import CourseTask from "@/views/management/course/CourseTask.vue";
 import CourseOptional from "@/views/management/course/CourseOptional.vue";
 import GradeInput from "@/views/management/grade/GradeInput.vue";
 import GradeStatisticsTeacher from "@/views/management/grade/GradeStatisticsTeacher.vue";
+import CourseScheduleManagement from "@/views/management/course/CourseScheduleManagement.vue";
+import CourseScheduleDisplay from "@/views/management/course/CourseScheduleDisplay.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -107,6 +109,14 @@ const router = createRouter({
                     path: "/management/course/optional",
                     component: CourseOptional,
                     name: "CourseOptional"
+                }, {
+                    path: "/management/course/scheduleManagement",
+                    component: CourseScheduleManagement,
+                    name: "CourseScheduleManagement"
+                }, {
+                    path: "/management/course/schedule",
+                    component: CourseScheduleDisplay,
+                    name: "CourseScheduleDisplay"
                 }]
             }, {
                 path: "/management/user",

@@ -63,7 +63,8 @@ const rootItems: ItemType[] = reactive([
   getItem('班级管理', 'ClassManagement', () => h(InsertRowBelowOutlined),),
   getItem('课程信息', 'CourseInfo', () => h(BookOutlined), [
     getItem('课程管理', 'CourseManagement'),
-    getItem('选课管理', 'CourseTask')
+    getItem('选课管理', 'CourseTask'),
+    getItem('课程安排', 'CourseScheduleManagement'),
   ]),
 
   getItem('个人中心', 'UserCenter', () => h(UserOutlined))
@@ -75,6 +76,9 @@ const teacherItems: ItemType[] = reactive([
   getItem('成绩管理', 'GradeManagement', () => h(UnorderedListOutlined), [
     getItem('成绩录入', 'GradeInput'),
     getItem('成绩统计', 'GradeStatisticsTeacher')
+  ]),
+  getItem("课程管理", 'CourseManagement', () => h(BookOutlined), [
+    getItem('课表查看', 'CourseScheduleDisplay')
   ]),
 
   getItem('个人中心', 'UserCenter', () => h(UserOutlined))
@@ -89,6 +93,7 @@ const studentItems: ItemType[] = reactive([
   ]),
   getItem("课程管理", 'CourseManagement', () => h(BookOutlined), [
     getItem('课程选择', 'CourseOptional'),
+    getItem('课表查看', 'CourseScheduleDisplay')
   ]),
   getItem('个人信息', 'UserCenter', () => h(UserOutlined))
 
