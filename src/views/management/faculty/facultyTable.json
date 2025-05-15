@@ -8,6 +8,10 @@
         "type": "input",
         "disabled": true,
         "defaultValue": "系统自动生成"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入编号"
       }
     },
     {
@@ -20,6 +24,10 @@
       "excel": {
         "name": "名称",
         "key": "facultyName"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入名称"
       }
     },
     {
@@ -37,6 +45,12 @@
       "excel": {
         "name": "院长",
         "key": "teacherNo"
+      },
+      "search": {
+        "type": "select",
+        "name": "teacher",
+        "option": "teacherName",
+        "optionKey": "teacherNo"
       }
     },
     {
@@ -49,6 +63,10 @@
       "excel": {
         "name": "职称",
         "key": "officeLocation"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入工作地点"
       }
     },
     {

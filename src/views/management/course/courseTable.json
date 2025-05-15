@@ -8,6 +8,10 @@
         "type": "input",
         "disabled": true,
         "defaultValue": "系统自动生成"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入编号"
       }
     },
     {
@@ -20,6 +24,10 @@
       "excel": {
         "name": "名称",
         "key": "courseName"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入名称"
       }
     },
     {
@@ -37,6 +45,12 @@
       "excel": {
         "name": "教师",
         "key": "teacherNo"
+      },
+      "search": {
+        "type": "select",
+        "name": "teacher",
+        "option": "teacherName",
+        "optionKey": "teacherNo"
       }
     },
     {
@@ -52,6 +66,12 @@
       "excel": {
         "name": "学分",
         "key": "courseGrade"
+      },
+      "search": {
+        "type": "number",
+        "options": {
+          "min": 0
+        }
       }
     },
     {
@@ -67,6 +87,12 @@
       "excel": {
         "name": "年龄",
         "key": "courseTime"
+      },
+      "search": {
+        "type": "number",
+        "options": {
+          "min": 0
+        }
       }
     },
     {

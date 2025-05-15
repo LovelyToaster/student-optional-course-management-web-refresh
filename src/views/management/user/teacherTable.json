@@ -8,6 +8,10 @@
         "type": "input",
         "disabled": true,
         "defaultValue": "系统自动生成"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入编号"
       }
     },
     {
@@ -20,6 +24,10 @@
       "excel": {
         "name": "姓名",
         "key": "teacherName"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入姓名"
       }
     },
     {
@@ -36,6 +44,13 @@
       "excel": {
         "name": "性别",
         "key": "teacherSex"
+      },
+      "search": {
+        "type": "radio",
+        "options": [
+          "男",
+          "女"
+        ]
       }
     },
     {
@@ -52,6 +67,13 @@
       "excel": {
         "name": "年龄",
         "key": "teacherAge"
+      },
+      "search": {
+        "type": "number",
+        "options": {
+          "min": 20,
+          "max": 90
+        }
       }
     },
     {
@@ -64,6 +86,10 @@
       "excel": {
         "name": "学历",
         "key": "teacherDegree"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入学历"
       }
     },
     {
@@ -76,6 +102,10 @@
       "excel": {
         "name": "职称",
         "key": "teacherJob"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入职称"
       }
     },
     {
@@ -93,6 +123,12 @@
       "excel": {
         "name": "院系",
         "key": "facultyNo"
+      },
+      "search": {
+        "type": "select",
+        "name": "faculty",
+        "option": "facultyName",
+        "optionKey": "facultyNo"
       }
     },
     {
@@ -105,6 +141,10 @@
       "excel": {
         "name": "职称",
         "key": "teacherGraduateInstitutions"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入毕业院校"
       }
     },
     {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {DeleteOutlined, DownloadOutlined, UploadOutlined} from '@ant-design/icons-vue'
+import {DeleteOutlined, DownloadOutlined, RestOutlined, SearchOutlined, UploadOutlined} from '@ant-design/icons-vue'
 import * as XLSX from 'xlsx'
 import {computed, h, reactive, ref, toRaw, watch} from "vue";
 import {notification, Progress} from "ant-design-vue";
@@ -32,6 +32,9 @@ watch(
 
 const addColumns = computed(() =>
     prop.columns.filter(field => field.key !== 'action')
+)
+const searchColumns = computed(() =>
+    prop.columns.filter(field => field.search != null)
 )
 
 function excelDownload() {
@@ -235,11 +238,62 @@ function addInfoSubmit() {
   addVisible.value = false
 }
 
+const searchData = reactive<any>({})
+
+function searchInfoSubmit() {
+  apiInstance.post(`/${prop.mark}/search`, searchData).then(res => {
+    if (res.data.code === code.SEARCH_SUCCESS) {
+      notification.success({
+        message: '成功',
+        description: res.data.message
+      })
+      data.splice(0, data.length, ...res.data.data.map((item, index) => ({
+        ...item,
+        key: index.toString(),
+      })))
+    } else {
+      notification.error({
+        message: '错误',
+        description: res.data.message
+      })
+    }
+    Object.keys(searchData).forEach(key => {
+      delete searchData[key]
+    })
+
+  })
+  isSearch.value = false
+}
+
+function resetSearch() {
+  apiInstance.get(`/${prop.mark}/all`).then(res => {
+    if (res.data.code === code.SEARCH_SUCCESS) {
+      if (prop.mark === 'student' || prop.mark === 'teacher')
+        data.splice(0, data.length, ...res.data.data.data.map((item, index) => ({
+          ...item,
+          key: index.toString(),
+        })))
+      else
+        data.splice(0, data.length, ...res.data.data.map((item, index) => ({
+          ...item,
+          key: index.toString(),
+        })))
+    }
+  })
+}
+
 function cancelAdd() {
   Object.keys(addData).forEach(key => {
     delete addData[key]
   })
   addVisible.value = false
+}
+
+function cancelSearch() {
+  Object.keys(searchData).forEach(key => {
+    delete searchData[key]
+  })
+  isSearch.value = false
 }
 
 const selectedRowKeys = ref([])
@@ -424,6 +478,26 @@ function addSelectChange(value, option) {
     }
 }
 
+function searchSelectChange(value, option) {
+  const verify = checkSelectOption()
+  if (verify.isFaculty && verify.isMajor && verify.isClass)
+    if (option.facultyNo && !option.majorNo) {
+      selectFilter.selectFaculty = option.facultyNo
+      searchData.majorNo = null
+      searchData.classNo = null
+    }
+  if (verify.isFaculty && verify.isMajor)
+    if (option.facultyNo && !option.majorNo) {
+      selectFilter.selectFaculty = option.facultyNo
+      searchData.majorNo = null
+    }
+  if (verify.isMajor && verify.isClass)
+    if (option.majorNo && !option.classNo) {
+      selectFilter.selectMajor = option.majorNo
+      searchData.classNo = null
+    }
+}
+
 const emit = defineEmits(['updateSelectFilter'])
 
 const selectFilter = reactive({
@@ -455,8 +529,18 @@ watch(
       selectFilter.selectMajor = newVal.majorNo
     }
 )
+watch(
+    () => ({
+      facultyNo: searchData.facultyNo,
+      majorNo: searchData.majorNo
+    }),
+    (newVal) => {
+      selectFilter.selectFaculty = newVal.facultyNo
+      selectFilter.selectMajor = newVal.majorNo
+    }
+)
 
-
+const isSearch = ref(false)
 </script>
 
 <template>
@@ -485,6 +569,9 @@ watch(
         </template>
       </a-button>
     </a-popconfirm>
+    <a-button type="primary" :icon="h(SearchOutlined)" style="margin-left: 15px" @click="isSearch = !isSearch"> 搜索
+    </a-button>
+    <a-button type="primary" :icon="h(RestOutlined)" style="margin-left: 15px" @click="resetSearch"/>
   </a-card>
   <a-modal v-model:open="addVisible" title="添加信息" @ok="addInfoSubmit" @cancel="cancelAdd">
     <a-form-item
@@ -576,6 +663,32 @@ watch(
       </template>
     </template>
   </a-table>
+
+  <a-modal v-model:open="isSearch" title="查询信息" @ok="searchInfoSubmit" @cancel="cancelSearch">
+    <a-form-item
+        v-for="col in searchColumns"
+        :key="col.key"
+        :label="col.title"
+    >
+      <a-input v-if="col.search?.type === 'input'" :placeholder="col.search.placeholder"
+               v-model:value="searchData[col.dataIndex]"/>
+
+      <a-input-number v-else-if="col.search?.type === 'number'" :min="col.search.options.min"
+                      :max="col.search.options.max" v-model:value="searchData[col.dataIndex]"/>
+
+      <a-radio-group v-else-if="col.search?.type === 'radio'" v-model:value="searchData[col.dataIndex]">
+        <a-radio v-for="option in col.search.options" :key="option" :value="option">
+          {{ option }}
+        </a-radio>
+      </a-radio-group>
+
+      <a-select v-else-if="col.search?.type === 'select'" :placeholder="col.search.placeholder"
+                v-model:value="searchData[col.search.optionKey]" show-search style="width: 100%"
+                :field-names="{ label: col.search.option, value: col.search.optionKey }"
+                :options="selectData[col.search.name]" @change="searchSelectChange">
+      </a-select>
+    </a-form-item>
+  </a-modal>
 </template>
 
 <style scoped>

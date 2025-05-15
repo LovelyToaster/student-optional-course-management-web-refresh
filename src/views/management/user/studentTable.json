@@ -8,6 +8,10 @@
         "type": "input",
         "disabled": true,
         "defaultValue": "系统自动生成"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入学号"
       }
     },
     {
@@ -20,6 +24,10 @@
       "excel": {
         "name": "姓名",
         "key": "studentName"
+      },
+      "search": {
+        "type": "input",
+        "placeholder": "请输入姓名"
       }
     },
     {
@@ -36,6 +44,13 @@
       "excel": {
         "name": "性别",
         "key": "studentSex"
+      },
+      "search": {
+        "type": "radio",
+        "options": [
+          "男",
+          "女"
+        ]
       }
     },
     {
@@ -52,6 +67,13 @@
       "excel": {
         "name": "年龄",
         "key": "studentAge"
+      },
+      "search": {
+        "type": "number",
+        "options": {
+          "min": 16,
+          "max": 50
+        }
       }
     },
     {
@@ -66,6 +88,13 @@
         "name": "faculty",
         "option": "facultyName",
         "optionKey": "facultyNo"
+      },
+      "search": {
+        "type": "select",
+        "name": "faculty",
+        "option": "facultyName",
+        "optionKey": "facultyNo",
+        "placeholder": "选择院系后方可选择专业和班级"
       }
     },
     {
@@ -76,6 +105,12 @@
         "type": "select"
       },
       "select": {
+        "name": "major",
+        "option": "majorName",
+        "optionKey": "majorNo"
+      },
+      "search": {
+        "type": "select",
         "name": "major",
         "option": "majorName",
         "optionKey": "majorNo"
@@ -96,6 +131,12 @@
       "excel": {
         "name": "班级",
         "key": "classNo"
+      },
+      "search": {
+        "type": "select",
+        "name": "class",
+        "option": "className",
+        "optionKey": "classNo"
       }
     },
     {
