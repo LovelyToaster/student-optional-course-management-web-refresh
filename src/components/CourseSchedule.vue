@@ -278,7 +278,7 @@ function deleteCourseSchedule() {
     </a-form-item>
   </a-modal>
 
-  <a-modal v-model:open="isOpen">
+  <a-modal v-model:open="isOpen" title="课程信息">
     <a-descriptions layout="vertical">
       <a-descriptions-item label="课程名">{{ openCourse.courseName }}</a-descriptions-item>
       <a-descriptions-item label="教师姓名">{{ openCourse.teacherName }}</a-descriptions-item>
