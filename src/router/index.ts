@@ -18,6 +18,7 @@ import GradeInput from "@/views/management/grade/GradeInput.vue";
 import GradeStatisticsTeacher from "@/views/management/grade/GradeStatisticsTeacher.vue";
 import CourseScheduleManagement from "@/views/management/course/CourseScheduleManagement.vue";
 import CourseScheduleDisplay from "@/views/management/course/CourseScheduleDisplay.vue";
+import PermissionsManagement from "@/views/management/user/PermissionsManagement.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -120,8 +121,15 @@ const router = createRouter({
                 }]
             }, {
                 path: "/management/user",
-                component: UserCenter,
-                name: "UserCenter"
+                children: [{
+                    path: "/management/user/center",
+                    component: UserCenter,
+                    name: "UserCenter"
+                }, {
+                    path: "/management/user/permissions",
+                    component: PermissionsManagement,
+                    name: "PermissionsManagement"
+                }]
             }]
         }
     ]

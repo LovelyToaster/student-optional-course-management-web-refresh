@@ -57,6 +57,7 @@ const rootItems: ItemType[] = reactive([
   getItem('人员管理', 'UserManagement', () => h(UserOutlined), [
     getItem('学生管理', 'StudentManagement'),
     getItem('教师信息', 'TeacherManagement'),
+    getItem('权限管理', 'PermissionsManagement'),
   ]),
   getItem('院系管理', 'FacultyManagement', () => h(BankOutlined)),
   getItem('专业管理', 'MajorManagement', () => h(BarsOutlined),),
