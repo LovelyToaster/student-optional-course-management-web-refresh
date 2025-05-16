@@ -288,10 +288,13 @@ function deleteCourseSchedule() {
       <a-descriptions-item label="结束时间">{{ openCourse.endTime }}周</a-descriptions-item>
       <a-descriptions-item label="节次">{{ openCourse.time }}</a-descriptions-item>
       <a-descriptions-item label="星期">{{ openCourse.week }}</a-descriptions-item>
-      <a-descriptions-item label="操作" v-if="loginStore.userInfo.permissions===0">
-        <a-button type="primary" danger @click="deleteCourseSchedule()">删除</a-button>
-      </a-descriptions-item>
     </a-descriptions>
+    <template #footer>
+      <a-button v-if="loginStore.userInfo.permissions === 0" type="primary" danger @click="deleteCourseSchedule">
+        删除
+      </a-button>
+      <a-button @click="isOpen = false">取消</a-button>
+    </template>
   </a-modal>
 </template>
 
