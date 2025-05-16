@@ -7,6 +7,7 @@ import {notification} from "ant-design-vue";
 import {apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {useRouter} from "vue-router";
+import {VueCropper} from 'vue-cropper'
 
 const loginStore = useLoginStore();
 const teacherStore = useTeacherStore();
