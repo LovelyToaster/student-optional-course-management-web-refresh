@@ -96,7 +96,7 @@ const studentItems: ItemType[] = reactive([
     getItem('课程选择', 'CourseOptional'),
     getItem('课表查看', 'CourseScheduleDisplay')
   ]),
-  getItem('个人信息', 'UserCenter', () => h(UserOutlined))
+  getItem('个人中心', 'UserCenter', () => h(UserOutlined))
 
 ]);
 
