@@ -227,7 +227,6 @@ function deleteCourseSchedule() {
               <div>{{ course.teacherName }}</div>
               <div>{{ course.facultyName }} {{ course.majorName }} {{ course.className }}</div>
               <div>{{ course.place }}室</div>
-              <div>{{ course.startTime }}周到{{ course.endTime }}周</div>
             </div>
           </div>
           <div v-else></div>
