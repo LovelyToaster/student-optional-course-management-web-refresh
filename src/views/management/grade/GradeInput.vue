@@ -38,6 +38,11 @@ const gradeColumns = [
     key: 'displayGrade',
   },
   {
+    title: '学期',
+    dataIndex: 'term',
+    key: 'term',
+  },
+  {
     title: '操作',
     dataIndex: 'action',
     key: 'action',
@@ -75,7 +80,19 @@ function getGrade() {
         message: '成功',
         description: res.data.message
       })
-      gradeData.splice(0, gradeData.length, ...res.data.data)
+
+      const sortedData = res.data.data.sort((a, b) => {
+        const parseTerm = (term) => {
+          const [yearRange, semester] = term.split(' ')
+          const [startYear] = yearRange.split('-').map(Number)
+          const semesterOrder = semester === '第一学期' ? 1 : 2
+          return startYear * 10 + semesterOrder
+        }
+
+        return parseTerm(a.term) - parseTerm(b.term)
+      })
+
+      gradeData.splice(0, gradeData.length, ...sortedData)
       gradeDisplay()
     } else if (res.data.code === code.SEARCH_FAILED) {
       notification.error({
