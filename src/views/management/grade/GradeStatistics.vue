@@ -32,11 +32,11 @@ onMounted(() => {
           .legend('color', {position: 'bottom', layout: {justifyContent: 'center'}})
           .label({
             position: 'outside',
-            text: (data) => `${data.item}: ${data.percent * 100}%`,
+            text: (data) => `${data.item}: ${(data.percent * 100).toFixed(1)}%`,
           })
           .tooltip((data) => ({
             name: data.item,
-            value: `${data.percent * 100}%`,
+            value: `${(data.percent * 100).toFixed(1)}%`,
           }));
 
       chart.render();

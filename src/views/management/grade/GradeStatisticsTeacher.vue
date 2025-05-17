@@ -4,6 +4,7 @@ import {apiDeepSeek, apiInstance} from "@/hooks/api";
 import code from "@/hooks/code";
 import {onMounted, reactive, ref} from "vue";
 import {useLoginStore} from "@/store/";
+import dayjs from "dayjs";
 
 const loginStore = useLoginStore()
 
@@ -24,12 +25,24 @@ function getStudentNo() {
       })
 }
 
+const nowTerm = ref(null)
+
 function getStatistics(studentNosStr) {
   const gradeStatistics = reactive([])
+  const now = dayjs()
+  const year = now.year();
+  const month = now.month() + 1;
+
+  if (month <= 7) {
+    nowTerm.value = `${year - 1}-${year} 第二学期`;
+  } else {
+    nowTerm.value = `${year}-${year + 1} 第一学期`;
+  }
   apiInstance.get("/grade/getGradeStatistics", {
     params: {
       teacherNo: loginStore.userInfo.userName,
-      studentNo: studentNosStr
+      studentNo: studentNosStr,
+      term: nowTerm.value
     }
   }).then(res => {
     if (res.data.code === code.SEARCH_SUCCESS) {
@@ -49,11 +62,11 @@ function getStatistics(studentNosStr) {
           .legend('color', {position: 'bottom', layout: {justifyContent: 'center'}})
           .label({
             position: 'outside',
-            text: (data) => `${data.item}: ${data.percent * 100}%`,
+            text: (data) => `${data.item}: ${(data.percent * 100).toFixed(1)}%`,
           })
           .tooltip((data) => ({
             name: data.item,
-            value: `${data.percent * 100}%`,
+            value: `${(data.percent * 100).toFixed(1)}%`,
           }));
 
       chart.render();
@@ -123,7 +136,8 @@ let prompt = null
 function getDeepseekSay() {
   isSay.value = true
   apiInstance.post("/grade/search", {
-    teacherNo: loginStore.userInfo.userName
+    teacherNo: loginStore.userInfo.userName,
+    term: nowTerm.value
   }).then(res => {
     const grade = res.data.data
     prompt = `
@@ -158,7 +172,7 @@ function getDeepseekSay() {
 <template>
   <div style="margin: 15px;display: flex;">
     <a-card style="flex:1">
-      <div style="font-size: 20px;font-weight: bold">在校成绩区间统计</div>
+      <div style="font-size: 20px;font-weight: bold">{{ nowTerm }}成绩区间统计</div>
       <div id="container"></div>
     </a-card>
     <div style="display: flex;flex:1;flex-direction: column">
