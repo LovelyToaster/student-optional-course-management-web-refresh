@@ -33,11 +33,12 @@ function getStatistics(studentNosStr) {
   const year = now.year();
   const month = now.month() + 1;
 
-  if (month <= 7) {
+  if (month > 7) {
     nowTerm.value = `${year - 1}-${year} 第二学期`;
   } else {
-    nowTerm.value = `${year}-${year + 1} 第一学期`;
+    nowTerm.value = `${year - 1}-${year} 第一学期`;
   }
+
   apiInstance.get("/grade/getGradeStatistics", {
     params: {
       teacherNo: loginStore.userInfo.userName,
@@ -76,6 +77,13 @@ function getStatistics(studentNosStr) {
 
 const tableData = reactive([])
 
+function tableDisplay() {
+  tableData.forEach(item => {
+    if (item.gpa < 0)
+      item.gpa = "等待成绩录入"
+  })
+}
+
 function getGPA(studentNosStr) {
   apiInstance.get("/grade/getGPA", {
     params: {
@@ -105,6 +113,8 @@ function getGPA(studentNosStr) {
       });
 
       tableData.splice(0, tableData.length, ...sortedGPA);
+
+      tableDisplay()
     }
   })
 }
