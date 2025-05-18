@@ -102,9 +102,14 @@ function initChart() {
     autoFit: true,
   });
 
+  const filteredData = studentStore.gpaList.filter(item => item.gpa !== -1).map(item => ({
+    GPA: item.gpa,
+    term: item.term,
+  }));
+
   chart
       .data({
-        value: studentStore.gpaList,
+        value: filteredData,
         transform: [
           {
             type: 'rename',

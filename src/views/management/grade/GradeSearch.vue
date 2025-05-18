@@ -13,7 +13,9 @@ const academicYears = reactive([])
 const columns = [
   {title: '课程号', dataIndex: 'courseNo', key: 'courseNo'},
   {title: '课程', dataIndex: 'courseName', key: 'courseName'},
-  {title: '成绩', dataIndex: 'grade', key: 'grade'},
+  {title: '平时成绩', dataIndex: 'usualGrade', key: 'usualGrade'},
+  {title: '期末成绩', dataIndex: 'finalExamGrade', key: 'finalExamGrade'},
+  {title: '总成绩', dataIndex: 'totalGrade', key: 'totalGrade'},
   {title: '学分', dataIndex: 'courseGrade', key: 'courseGrade'},
   {title: '绩点', dataIndex: 'coursePoint', key: 'coursePoint'},
   {title: '学期', dataIndex: 'term', key: 'term'}
@@ -27,8 +29,10 @@ function getAcademicYears() {
     if (item.term) {
       termSet.add(item.term)
     }
-    if (item.grade < 0) {
-      item.grade = "暂无"
+    if (item.totalGrade < 0) {
+      item.usualGrade = "暂无"
+      item.finalExamGrade = "暂无"
+      item.totalGrade = "暂无"
       item.coursePoint = "暂无"
     }
   })

@@ -106,7 +106,14 @@ function getDeepseekSay() {
     </a-card>
     <div style="display: flex;flex:1;flex-direction: column">
       <div style="margin-left: 15px;flex:1">
-        <a-table :columns="columns" :data-source="studentStore.gpaList"></a-table>
+        <a-table :columns="columns" :data-source="studentStore.gpaList">
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.dataIndex === 'gpa'">
+              <span v-if="record.gpa === -1">等待成绩录入</span>
+              <span v-else>{{ record.gpa.toFixed(2) }}</span>
+            </template>
+          </template>
+        </a-table>
       </div>
       <div style="margin-left: 15px;flex:1">
         <a-card title="成绩总结">
