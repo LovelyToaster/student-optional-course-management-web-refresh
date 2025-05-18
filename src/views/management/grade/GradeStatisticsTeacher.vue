@@ -151,7 +151,7 @@ function getDeepseekSay() {
   }).then(res => {
     const grade = res.data.data
     prompt = `
-        这是我的学生所有课的课程成绩，请使用中文总结成绩概况：
+        我是一名教师，这是我的学生所有课的课程成绩，请使用中文总结成绩概况：
 
         ${JSON.stringify(grade, null, 2)}
         其中-1分的成绩为暂未录入，不需要显示在概况中
