@@ -49,8 +49,29 @@ function getGrade() {
         message: '查询成功',
         description: res.data.message
       })
-      Object.assign(rawData, res.data.data)
-      Object.assign(data, res.data.data)
+
+      const sortedGPA = res.data.data.sort((a: any, b: any) => {
+        const parseTerm = (term: string) => {
+          const [yearPart, semesterPart] = term.split(" ");
+          const [startYear, endYear] = yearPart.split("-").map(Number);
+          const semesterNum = semesterPart.includes("第一") ? 1 : 2;
+          return {startYear, endYear, semesterNum};
+        };
+
+        const termA = parseTerm(a.term);
+        const termB = parseTerm(b.term);
+
+        if (termA.startYear !== termB.startYear) {
+          return termA.startYear - termB.startYear;
+        }
+        if (termA.endYear !== termB.endYear) {
+          return termA.endYear - termB.endYear;
+        }
+        return termA.semesterNum - termB.semesterNum;
+      });
+
+      Object.assign(rawData, sortedGPA)
+      Object.assign(data, sortedGPA)
       getAcademicYears()
     }
   })
@@ -80,7 +101,7 @@ getGrade()
         <span>学号: {{ studentStore.studentInfo.studentNo }}</span>
         <span>
           平均绩点:&nbsp;
-          <a-tag color="blue" style="font-size: 15px">{{studentStore.studentInfo.averageGPA}}</a-tag>
+          <a-tag color="blue" style="font-size: 15px">{{ studentStore.studentInfo.averageGPA }}</a-tag>
         </span>
         <div>
           <a-select v-model:value="selectedYear" placeholder="请选择学年" style="width: 200px">
